@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 
 class DashboardController extends Controller
 {
@@ -24,7 +25,8 @@ class DashboardController extends Controller
             'status' => 1,
         ]);
 
-        return redirect()->back()->with('active', 'User successfully active');
+            Toastr::success('User successfully active :-)','Success');
+        return redirect()->back();
         
     }
 
@@ -34,7 +36,8 @@ class DashboardController extends Controller
             'status' => 0,
         ]);
 
-        return redirect()->back()->with('inactive', 'User successfully inactive');
+    Toastr::info('User successfully inactive :-)','Success');
+        return redirect()->back();
         
     }
 
@@ -44,7 +47,8 @@ class DashboardController extends Controller
         $users = User::findOrFail($id);
         $users->delete();
 
-        return redirect()->back()->with('success', 'User successfully deleted');
+        Toastr::success('User successfully deleted :-)','Success');
+        return redirect()->back();
 
     }
 
